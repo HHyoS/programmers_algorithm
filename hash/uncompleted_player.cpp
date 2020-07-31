@@ -1,4 +1,4 @@
-#include <string>
+/*#include <string>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -19,4 +19,27 @@ string solution(vector<string> participant, vector<string> completion) {
     }
     }
     return answer;
+}*/
+// The above code passed the accuracy test but was re-coded using unordered_map to increase efficiency with less efficient code.
+
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+string solution(vector<string> participant, vector<string> completion) {
+    string answer = "";
+    unordered_map<string, int> ptp;
+    
+    for(string name : participant)
+        ++ptp[name];
+    
+    for(string name : completion)
+        --ptp[name];
+    
+    for(auto pair:ptp)
+        if(pair.second > 0)
+            return pair.first;
 }

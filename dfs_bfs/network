@@ -1,45 +1,26 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <unordered_map>
 #include <algorithm>
 
 using namespace std;
+bool tset[201];
+void dfs(int start, vector<vector<int>> computers, int size){
+    tset[start] = true;
+    for(int a = 0; a < size; ++a){
+        if(!tset[a] && computers[start][a] ==1){
+            dfs(a, computers, size);
+        }
+    }
+}
 
 int solution(int n, vector<vector<int>> computers) {
     int answer = 0;
-    int sum = 0;
-    vector<vector<int>> check;
-    vector<int> test;
- /*   for(int a = 0; a < n; ++a){
-            if(computers[0][a] == 1)
-                test.push_back(a);
+    for(int a =0; a < n; ++a){
+        if(!tset[a]){
+            dfs(a, computers, n);
+            ++answer;
     }
-    check.push_back(test);
-    test.clear();*/
-    for(int a = 0; a < n; ++a){
-        for(int b = 0; b < n; ++b){
-            if(computers[a][b] == 1){
-                test.push_back(b);}
-        }
-        if(a==0){
-            check.push_back(test);
-            test.clear();
-        }
-        else{
-            for(int c = 0; c < check.size(); ++c){
-                auto d = find(check[c].begin(), check[c].end(), a);
-                if(d != check[c].end()){
-                    for(auto t : test){
-                        check[c].push_back(t);
-                    }
-                    break;}
-                else if(c == check.size()-1)
-                    check.push_back(test);
-            }      
-            test.clear();
-        }
     }
-    answer = check.size();
     return answer;
 }

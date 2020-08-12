@@ -1,0 +1,81 @@
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+        
+int selec(vector<int>& scov){
+    int index = 1;
+    int selc = scov[index];
+    scov[index] = scov.back();
+    scov.erase(scov.end()-1);
+    
+    while(index*2+1 < scov.size()){
+        int temp;
+        if(index*2 <= scov.size()-1)
+            if(scov[index*2] <= scov[index]){
+            temp = scov[index*2];
+            scov[index*2] = scov[index];
+            scov[index] = temp;
+            index = index*2;
+            }
+        else if(index*2+1 <= scov.size()-1)
+            if(scov[index*2+1] <= scov[index]){
+            temp = scov[index*2+1];
+            scov[index*2+1] = scov[index];
+            scov[index] = temp;
+            index = index*2 +1;
+    }
+        else
+            break;
+}
+    
+    return selc;
+}
+void pu(vector<int>& scoville, int mix){
+    int inx = 1;
+    scoville.insert(scoville.begin()+1,mix);
+    while(inx*2+1 < scoville.size()-1){
+        if(scoville.size()-1 >= inx*2 && scoville[inx*2] <= scoville[inx]){
+            int temp = scoville[inx];
+            scoville[inx] = scoville[inx*2];
+            scoville[inx*2] = temp;
+            inx = inx*2;}
+        
+        else if(scoville.size()-1 >= inx*2+1 && scoville[inx*2+1] <= scoville[inx]){
+            int temp = scoville[inx];
+            scoville[inx] = scoville[inx*2+1];
+            scoville[inx*2+1] = temp;
+            inx = inx*2+1;
+        }
+        else
+            break;
+    }
+}
+
+int solution(vector<int> scoville, int K) {
+    int rec = scoville.size() +1 ;
+    sort(scoville.begin(), scoville.end());
+    scoville.insert(scoville.begin(), 0);
+    int first;
+    int second;
+    while(scoville[1] <= K){
+        first = selec(scoville);
+        second = selec(scoville);
+        int mix = first + (second*2);
+        for(auto a : scoville)
+            printf("%d ",a);
+    printf("끝\n");
+        pu(scoville, mix);
+        for(auto a : scoville)
+            printf("%d ",a);
+    printf("끝\n");
+    
+    }
+    
+    if(scoville.size() == 2)
+        return -1;
+    else
+        return rec-scoville.size();
+}

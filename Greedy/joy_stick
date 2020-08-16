@@ -1,0 +1,60 @@
+#include <string>
+#include <vector>
+#include <iostream>
+
+using namespace std;
+
+int solution(string name) {
+    int answer = 0;
+    vector<char> alpha ={'A','B','C','D','E','F','G','H','I','J','K','L','N','M','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+    string al = "A";
+    vector<int> ar;
+    vector<int> array;
+    for(int a = 0; a < name.length()-1; ++a)
+        al +="A";
+    for(int a = name.length()-1; a >= 0; --a){
+        if(al.at(a) == name.at(a)){
+            ar.push_back(0);
+        }
+        else{
+            int count = 0;
+            int temp = 90 - int(name.at(a));
+            char comp = al.at(a);
+            if(temp < 12){
+                while(comp != name.at(a)){
+                    comp -= 1;
+                    if(comp < 'A')
+                        comp = 'Z';
+                    ++count;                    
+                }
+                ar.push_back(count);
+            }
+            else{
+                while(comp != name.at(a)){
+                    comp+= 1;
+                    if(comp > 'Z')
+                        comp = 'A';
+                    ++count;
+                }
+                ar.push_back(count);
+            }
+        }
+    }
+    int big = 0;
+    int one = ar[0];
+    for(int a = 1; a < name.length(); ++a){
+        one = one + ar[a] + 1;
+        if(ar[a+1]==0 && a+2 == name.length()-1)
+            break;
+    }
+    int two = ar[0];
+    for(int a = name.length()-1; a >=0; --a){
+        two = two + ar[a] + 1;
+        if(ar[a-1] ==0 && (a-2) == 0)
+            break;
+    }
+    if(one > two)
+        return two;
+    else
+        return one;
+}

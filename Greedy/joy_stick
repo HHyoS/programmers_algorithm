@@ -62,6 +62,7 @@ int solution(string name) {
             t = 0;
             }
     }
+    // To obtain the minimum number of left and right latitudes using dfs
     printf("one = %d two = %d",one,two);
     if(one > two)
         return two;

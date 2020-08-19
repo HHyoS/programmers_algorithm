@@ -1,56 +1,25 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 
 int solution(vector<int> people, int limit) {
-    bool check[people.size()];
     int answer = 0;
-    int count = people.size();
     sort(people.begin(), people.end());
-    int end = people.size()-1;
-    for(int a = people.size()-1; a > -1; --a){
-        if(people[0] + people[a] > limit){
-            check[a] = false;
-            ++answer;
-            --end;
-    }
-        else{
-            check[a] = true;
-        }
-    }
+    int a =0;
+    int b = 0;
     
-    while(count != -1){
-        if(count ==1){
-            answer++;
-            break;}
-        count = 0;
-        for(int a = end-1; a > -1; --a){
-            while(people[a]==false)
-                --a;
-            if(people[end] + people[a] <= limit){
-                check[end--] = false;
-                check[a] = false;
+    for(b = people.size()-1; b > a; --b){
+        if(people[a]+people[b] <= limit){
+                ++a;
                 ++answer;
-                break;
-            } 
             }
-        for(int a = 0; a < people.size(); ++a){
-            if(check[a] == true){
-                ++count;
-                if(count > 1)
-                    break;
-            }
-            else{
-                if(check[a] == false && a == people.size()-1 && count == 0)
-                    count = -1;
-            }
-        }   
-    }
-        
-        
+        else
+            ++answer;
+        }
     
+	if (a == b)
+		answer++;
     return answer;
 }

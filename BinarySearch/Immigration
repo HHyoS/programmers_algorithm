@@ -29,3 +29,4 @@ Long long solution(int n, vector<int> times) {
 
   return answer;
 }
+ 

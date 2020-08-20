@@ -40,13 +40,16 @@ int solution(int n, vector<vector<int>> costs) {
         ar[c[1]][c[0]] = c[2];
     }
     vector<int> temp;
-    for(int a = 0; a < n; ++a){
+/*    for(int a = 0; a < n; ++a){
         if(check[a] == false){
             temp.push_back(a);
             check[a] = true;
             dfs(check, temp, ar, n, answer);
         }
-    }
+    }unnecessary code */ 
+    
+            temp.push_back(0);
+    
     temp.clear();
     ar.clear();
     return answer;

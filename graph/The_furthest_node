@@ -33,6 +33,6 @@ int solution(int n, vector<vector<int>> edge) {
                 
     for(int a = 1; a <= n; ++a)
         if(map[1][a]==mmax)
-            ++answer;
-    return answer;
+            ++answer; 
+    return answer; // I think I need to use bfs to solve it, but I'm going to try coding again tomorrow.
 }

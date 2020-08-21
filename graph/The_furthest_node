@@ -1,0 +1,38 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int n, vector<vector<int>> edge) {
+    int answer = 0;
+    vector<vector<int>> map(n+1,vector<int>(n+1,999999));
+    for(int a = 1; a < n; ++a){
+        for(int b = 1; b < n; ++b){
+            if(a==b)
+                map[a][b] = 0;
+        }
+    }
+    for(int a = 0; a < edge.size(); ++a){
+        map[edge[a][0]][edge[a][1]] = 1;
+        map[edge[a][1]][edge[a][0]] = 1;
+    }
+    int mmax = 0;
+    
+    for(int a = 1; a <= n; ++a){
+        for(int b = 1; b <= n; ++b){
+            int max = map[a][b];
+                for(int c = 1; c <= n; ++c){
+                    if(map[a][c] != 999999 && map[c][b] != 999999 && max > map[a][c] + map[c][b])
+                        max = map[a][c] + map[c][b];
+                }
+            map[a][b] = max;
+            if(a == 1 && mmax <= max)
+                mmax = max;
+        }
+    }
+                
+    for(int a = 1; a <= n; ++a)
+        if(map[1][a]==mmax)
+            ++answer;
+    return answer;
+}

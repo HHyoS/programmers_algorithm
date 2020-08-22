@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <queue>
 using namespace std;
-void bfs(vector<vector<int>> map, queue<int> que, int deep, vector<int>& array, bool check[]){
+vector<vector<int>> map;
+void bfs(queue<int> que, int deep, vector<int>& array, bool check[]){
     ++deep;
     int size = que.size();
     for(int a = 0; a < size; ++a){
@@ -19,22 +20,24 @@ void bfs(vector<vector<int>> map, queue<int> que, int deep, vector<int>& array, 
                 
         }
     }
+        if(que.empty())
+            return;
     }
     if(!que.empty())
-        bfs(map, que, deep, array,check);
+        bfs(que, deep, array,check);
 }
     
 int solution(int n, vector<vector<int>> edge) {
     bool check[n+1];
     int answer = 0;
-    vector<vector<int>> map;
-    vector<int>temp;
     vector<int> array;
+    vector<int>temp;
     for(int a = 0; a <= n; ++a){
         map.push_back(temp);
         array.push_back(999999);
         check[a] = true;
     }
+    check[1] = false;
     array[1] = 0;
     sort(edge.begin(), edge.end());
     
@@ -44,7 +47,7 @@ int solution(int n, vector<vector<int>> edge) {
    }
     queue<int> que;
     que.push(1);
-    bfs(map, que,  0, array, check);;
+    bfs(que,  0, array, check);;
     
     sort(array.begin(),array.end());
     

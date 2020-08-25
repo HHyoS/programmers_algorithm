@@ -1,0 +1,25 @@
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+int answer = 0;
+void dfs(int weak, int start, int now, int n, vector<int> dist, vector<int> check){
+    check[start] = 1;
+    now = weak[start];
+    for(int a = 0; a < weak.size(); ++a){
+        if(weak[a] > now;
+            
+    }
+    for(int a = 0; a < )
+
+}
+int solution(int n, vector<int> weak, vector<int> dist) {
+    int answer = 0;
+    sort(weak.begin(), weak.end());
+    sort(dist.begin(), dist.end(), greater<int>());
+    vector<int> check(dist.size(),0);
+    for(int a = 0; a < dist.size(); ++a){
+        dfs(weak, a, n, dist, check);
+    return answer;
+}

@@ -4,22 +4,53 @@
 
 using namespace std;
 int answer = 0;
-void dfs(int weak, int start, int now, int n, vector<int> dist, vector<int> check){
-    check[start] = 1;
-    now = weak[start];
-    for(int a = 0; a < weak.size(); ++a){
-        if(weak[a] > now;
-            
+void dfs(vector<int> weak, int start, int man,int now, int n, vector<int> dist, int count,check){
+    int before = weak[start];
+    weak.erase(weak.begin()+start);
+    dist.erase(dist.begin()+man);
+    count++;
+    while(true){
+        if(weak[0] <= now){
+            if(now >= n){
+                if(weak[0]+n <= now){
+                    weak.erase(weak.begin());
+                    now = now % n;
+                }
+                else
+                    break;
+            }
+            else
+                weak.erase(weak.begin());
+        }
+        else
+            break;
+        if(weak.empty())
+            break;
     }
-    for(int a = 0; a < )
+    if(weak.empty()){
+        if(answer > count)
+            answer = count;
+    }
+    for(int a = 0; a < weak.size(); ++a){
+        for(int b=  0; b < dist.size(); ++b){
+            now = weak[a] + dist[b];
+            dfs(weak, a, b, now, n, dist, count);
+    }
 
+}
 }
 int solution(int n, vector<int> weak, vector<int> dist) {
     int answer = 0;
     sort(weak.begin(), weak.end());
     sort(dist.begin(), dist.end(), greater<int>());
     vector<int> check(dist.size(),0);
-    for(int a = 0; a < dist.size(); ++a){
-        dfs(weak, a, n, dist, check);
+    for(int b = 0; b < weak.size(); ++b){
+        int now = 0;
+        int count = 0;
+        for(int a = 0; a < dist.size(); ++a){
+            now = weak[b]+dist[a];
+            dfs(weak,b, a,now,n,dist, count);
+        }
+    }
     return answer;
 }

@@ -75,5 +75,5 @@ int solution(int n, vector<int> wk, vector<int> dt) {
     }
     if(answer == dist.size()+1)
         return -1;
-    return answer;
+    return answer; 
 }

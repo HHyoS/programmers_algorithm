@@ -1,0 +1,49 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+ 
+int solution(int n, vector<int> weak, vector<int> dist) {
+ 
+    int answer = dist.size()+1;
+ 
+    sort(dist.begin(), dist.end());
+ 
+    for (int a = 0; a < weak.size(); a++) {
+ 
+        int temp = weak[0] + n;
+        for (int b = 1; b < weak.size(); b++) {
+            weak[b - 1] = weak[b];
+        }
+        weak[weak.size() - 1] = temp;
+
+        do {
+            int w = 0;
+            int d = 0;
+            for (d = 0; d < dist.size(); d++) {
+                int leng = weak[w] + dist[d];
+                while (leng >= weak[w]) {
+                    w++;
+                    if (w == weak.size()) {
+                        break;
+                    }
+                }
+                if (w == weak.size()) {
+                    break;
+                }
+                if(d == answer -1)
+                    break;
+            }
+ 
+            if (w == weak.size()) {
+                if (d + 1 < answer) {
+                    answer = d + 1;
+                }
+            }
+ 
+        } while (next_permutation(dist.begin(), dist.end()));
+    }
+    if(answer == dist.size()+1)
+        return -1;
+    return answer;
+}

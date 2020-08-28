@@ -8,15 +8,21 @@ vector<int> weak;
 vector<int> dist;
 int size;
 void dfs(vector<int> w, vector<int> d, int start, int man, int n, int count){
+    if(count >= answer)
+        return;
+    if(dist[man] >= n){
+        answer = 1;
+        return;
+        }
     int leng = weak[start] + dist[man];
     w[start] = 1;
     d[man] = 1;
 
     count++;
-    if(count >= answer || count > dist.size())
-        return;
     int e = start+1;
     for(int a= 0; a< weak.size(); ++a){
+        if(w[e%size] == 1)
+            break;
         if(leng >= n){
             if(e < size)
                 w[e] = 1;
@@ -43,16 +49,19 @@ void dfs(vector<int> w, vector<int> d, int start, int man, int n, int count){
     for(int a = 0; a < size; ++a){
         if(w[a] == 0)
             break;
-        else if(w[a] == 1 && a == size-1){
+        else if(a == size-1){
             if(answer > count){
                 answer = count;
+                return;
             }
+            else
+                return;
         }
     }
     for(int a = 0; a < size; ++a){
         if(w[a] == 0){
             for(int b=  0; b < dist.size(); ++b){
-                if(d[b] == 0){
+                if(d[b] == 0 && count+1 < answer){
                     dfs(w,d, a, b, n, count);
                 }
             }

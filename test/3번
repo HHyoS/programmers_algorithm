@@ -11,7 +11,7 @@ void dfs(vector<int> temp,int chance){
     }
     else{
         vector<int> tt;
-        for(int a = 0; a < temp.size()-1; ++a){
+        for(int a = 0; a < temp.size()-1; ++a){ 
             tt.assign(temp.begin(), temp.end());
             if(tt[a] > tt[a+1]){
                 tt.erase(tt.begin()+a);
